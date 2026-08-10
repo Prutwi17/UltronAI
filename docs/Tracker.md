@@ -12,14 +12,14 @@ Status Options:
 
 | Task | Status |
 | :--- | :--- |
-| Create Git repository & structure | `TODO` |
-| Setup frontend Vite project | `TODO` |
-| Setup backend Spring Boot project | `TODO` |
-| Setup AI FastAPI service | `TODO` |
-| Configure MySQL container | `TODO` |
-| Configure Redis container | `TODO` |
-| Configure RabbitMQ container | `TODO` |
-| Configure Docker Compose & .env | `TODO` |
+| Create Git repository & structure | `DONE` |
+| Setup frontend Vite project | `DONE` |
+| Setup backend Spring Boot project | `DONE` |
+| Setup AI FastAPI service | `DONE` |
+| Configure MySQL container | `DONE` |
+| Configure Redis container | `DONE` |
+| Configure RabbitMQ container | `DONE` |
+| Configure Docker Compose & .env | `DONE` |
 
 ---
 

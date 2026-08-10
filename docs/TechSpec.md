@@ -16,7 +16,7 @@ UltronAI utilizes a modular, multi-tenant, service-oriented architecture with a 
                                             ▼
                                  ┌──────────────────────┐
                                  │  Spring Boot Backend │
-                                 │      (Java 21)       │
+                                 │      (Java 17)       │
                                  └──────────┬───────────┘
                                             │
                   ┌─────────────────────────┼─────────────────────────┐
@@ -43,7 +43,7 @@ UltronAI utilizes a modular, multi-tenant, service-oriented architecture with a 
 * **Responsibilities**: Authentication, chat interface, visual workflow builder (`React Flow`), agent handoff dashboard, platform administration.
 
 ### 2.2 Spring Boot Backend
-* **Tech**: Java 21, Spring Boot 3.2, Spring Security (JWT), Spring Data JPA, Hibernate, Spring WebSocket (STOMP), Bean Validation, Maven.
+* **Tech**: Java 17, Spring Boot 3.5, Spring Security (JWT), Spring Data JPA, Hibernate, Spring WebSocket (STOMP), Bean Validation, Maven.
 * **Responsibilities**: Authentication/authorization, tenant isolation, conversation management, workflow orchestration, RabbitMQ event dispatching, WebSocket gateway management.
 
 ### 2.3 Python AI/NLP Service

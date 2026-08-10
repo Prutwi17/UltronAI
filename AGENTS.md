@@ -189,7 +189,7 @@ WebSocket
 ## Backend
 
 ```text
-Java 21
+Java 17
 Spring Boot
 Spring Security
 Spring Data JPA

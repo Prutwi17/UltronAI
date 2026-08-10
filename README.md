@@ -258,7 +258,7 @@ Voice Output
 
 ### Backend
 
-* Java 21
+* Java 17
 * Spring Boot
 * Spring Security
 * Spring Data JPA
@@ -383,7 +383,7 @@ Sensitive credentials must never be committed to Git.
 Install:
 
 ```text
-Java 21
+Java 17
 Node.js
 npm
 Python 3.x
@@ -751,7 +751,7 @@ Do not bypass established layers without a valid architectural reason.
 
 Backend:
 
-* Java 21
+* Java 17
 * Spring Boot
 * Spring Security
 * Spring Data JPA
