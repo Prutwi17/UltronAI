@@ -1,0 +1,298 @@
+# UltronAI — Database Schema
+
+## 1. Database
+
+MySQL
+
+Database:
+
+ultronai
+
+---
+
+# 2. users
+
+id
+tenant_id
+full_name
+email
+password_hash
+role
+active
+created_at
+updated_at
+
+Roles:
+
+PLATFORM_ADMIN
+TENANT_ADMIN
+SUPPORT_AGENT
+CUSTOMER
+
+---
+
+# 3. tenants
+
+id
+name
+slug
+status
+created_at
+updated_at
+
+---
+
+# 4. agents
+
+id
+tenant_id
+name
+description
+status
+language
+created_at
+updated_at
+
+---
+
+# 5. intents
+
+id
+agent_id
+name
+description
+confidence_threshold
+created_at
+updated_at
+
+---
+
+# 6. intent_examples
+
+id
+intent_id
+example_text
+created_at
+
+---
+
+# 7. entities
+
+id
+agent_id
+name
+type
+description
+required
+
+---
+
+# 8. workflows
+
+id
+agent_id
+name
+description
+status
+version
+created_at
+updated_at
+
+---
+
+# 9. workflow_nodes
+
+id
+workflow_id
+node_type
+node_config
+position_x
+position_y
+
+Node types:
+
+START
+INTENT
+ENTITY
+API_CALL
+CONDITION
+MESSAGE
+HANDOFF
+END
+
+---
+
+# 10. conversations
+
+id
+tenant_id
+agent_id
+customer_id
+assigned_agent_id
+channel
+status
+started_at
+ended_at
+last_message_at
+
+Channels:
+
+WEB_CHAT
+VOICE
+
+---
+
+# 11. messages
+
+id
+conversation_id
+sender_type
+sender_id
+message_type
+content
+intent
+confidence
+created_at
+
+Sender types:
+
+CUSTOMER
+AI
+AGENT
+SYSTEM
+
+---
+
+# 12. tickets
+
+id
+tenant_id
+conversation_id
+customer_id
+assigned_agent_id
+title
+description
+priority
+status
+created_at
+updated_at
+
+Priority:
+
+LOW
+MEDIUM
+HIGH
+CRITICAL
+
+Status:
+
+OPEN
+IN_PROGRESS
+RESOLVED
+CLOSED
+
+---
+
+# 13. integrations
+
+id
+tenant_id
+name
+type
+base_url
+configuration
+status
+created_at
+
+Never store secrets in plain text.
+
+---
+
+# 14. conversation_events
+
+id
+conversation_id
+event_type
+payload
+created_at
+
+Examples:
+
+MESSAGE_RECEIVED
+INTENT_DETECTED
+WORKFLOW_STARTED
+API_CALLED
+WORKFLOW_COMPLETED
+ESCALATED
+AGENT_ASSIGNED
+
+---
+
+# 15. notifications
+
+id
+user_id
+type
+title
+message
+read
+created_at
+
+---
+
+# 16. audit_logs
+
+id
+tenant_id
+user_id
+action
+resource
+resource_id
+ip_address
+created_at
+
+---
+
+# 17. Relationships
+
+Tenant
+1 → N Users
+
+Tenant
+1 → N Agents
+
+Agent
+1 → N Intents
+
+Intent
+1 → N IntentExamples
+
+Agent
+1 → N Workflows
+
+Workflow
+1 → N WorkflowNodes
+
+Conversation
+1 → N Messages
+
+Conversation
+1 → N ConversationEvents
+
+Conversation
+1 → N Tickets
+
+---
+
+# 18. Indexes
+
+Create indexes for:
+
+users.email
+users.tenant_id
+conversations.tenant_id
+conversations.status
+messages.conversation_id
+tickets.tenant_id
+tickets.status
+audit_logs.tenant_id

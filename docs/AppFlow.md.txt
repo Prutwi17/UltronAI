@@ -1,0 +1,331 @@
+# UltronAI — Application Flow
+
+## 1. Login Flow
+
+User
+↓
+Login Page
+↓
+Enter Credentials
+↓
+Backend Authentication
+↓
+Validate User
+↓
+Generate JWT
+↓
+Return Token
+↓
+Frontend Stores Token
+↓
+Dashboard
+
+---
+
+# 2. Customer Chat Flow
+
+Customer
+↓
+Chat UI
+↓
+WebSocket Connection
+↓
+Send Message
+↓
+Conversation Service
+↓
+NLP Service
+↓
+Intent Detection
+↓
+Entity Extraction
+↓
+Context Manager
+↓
+Workflow Engine
+↓
+Business Service
+↓
+Response
+↓
+WebSocket
+↓
+Customer
+
+---
+
+# 3. Order Tracking
+
+User:
+"Where is my order?"
+
+↓
+
+Intent:
+
+ORDER_TRACKING
+
+↓
+
+Check Order ID
+
+↓
+
+If missing:
+
+Ask user for Order ID
+
+↓
+
+Order ID received
+
+↓
+
+Call Order API
+
+↓
+
+Retrieve status
+
+↓
+
+Generate response
+
+↓
+
+Send response
+
+---
+
+# 4. Order Cancellation
+
+User:
+"Cancel my order."
+
+↓
+
+CANCEL_ORDER
+
+↓
+
+Request Order ID
+
+↓
+
+Validate Order
+
+↓
+
+Check cancellation eligibility
+
+↓
+
+If eligible:
+
+Cancel order
+
+↓
+
+Update database
+
+↓
+
+Send confirmation
+
+---
+
+# 5. Refund Flow
+
+User
+↓
+REFUND_REQUEST
+↓
+Request Order ID
+↓
+Validate Order
+↓
+Check refund eligibility
+↓
+Create refund request
+↓
+Payment Service
+↓
+Return status
+↓
+Notify customer
+
+---
+
+# 6. Ticket Creation
+
+User
+↓
+CREATE_TICKET
+↓
+Collect issue
+↓
+Determine priority
+↓
+Create ticket
+↓
+Store ticket
+↓
+Notify support team
+↓
+Return ticket ID
+
+---
+
+# 7. Human Handoff
+
+Customer requests agent
+
+OR
+
+AI confidence < threshold
+
+↓
+
+Create escalation event
+
+↓
+
+RabbitMQ
+
+↓
+
+Agent Queue
+
+↓
+
+Assign support agent
+
+↓
+
+WebSocket notification
+
+↓
+
+Agent joins conversation
+
+↓
+
+AI stops responding
+
+↓
+
+Human conversation begins
+
+---
+
+# 8. AI Failure Flow
+
+Message
+↓
+NLP
+↓
+Confidence score
+
+If confidence >= threshold:
+
+Execute intent
+
+If confidence < threshold:
+
+Fallback response
+
+↓
+
+Try clarification
+
+↓
+
+If repeated failure:
+
+Human escalation
+
+---
+
+# 9. Voice Flow
+
+Voice input
+↓
+Speech-to-text
+↓
+NLP service
+↓
+Intent detection
+↓
+Workflow
+↓
+Response generation
+↓
+Text-to-speech
+↓
+Voice output
+
+---
+
+# 10. Admin Flow
+
+Admin Login
+↓
+Dashboard
+↓
+Select Tenant
+↓
+Manage:
+
+Users
+Agents
+AI Agents
+Intents
+Workflows
+Integrations
+Analytics
+
+---
+
+# 11. Tenant Flow
+
+Tenant Admin
+↓
+Create AI Agent
+↓
+Configure Agent
+↓
+Create Intents
+↓
+Create Workflow
+↓
+Configure Integration
+↓
+Test Agent
+↓
+Deploy Agent
+
+---
+
+# 12. Conversation Lifecycle
+
+NEW
+↓
+ACTIVE
+↓
+WAITING
+↓
+RESOLVED
+↓
+CLOSED
+
+Alternative:
+
+ACTIVE
+↓
+ESCALATED
+↓
+AGENT_ASSIGNED
+↓
+RESOLVED
+↓
+CLOSED

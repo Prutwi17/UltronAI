@@ -1,0 +1,371 @@
+# UltronAI — Security Specification
+
+## 1. Security Principles
+
+UltronAI follows:
+
+- Least privilege
+- Defense in depth
+- Secure by default
+- Zero trust
+- Tenant isolation
+- Input validation
+
+---
+
+# 2. Authentication
+
+Use JWT authentication.
+
+Access tokens must be short-lived.
+
+Refresh tokens must be handled securely.
+
+Passwords must be hashed using BCrypt.
+
+Never store plaintext passwords.
+
+---
+
+# 3. Authorization
+
+Use RBAC.
+
+Roles:
+
+PLATFORM_ADMIN
+TENANT_ADMIN
+SUPPORT_AGENT
+CUSTOMER
+
+Every protected endpoint must verify authorization.
+
+---
+
+# 4. Tenant Isolation
+
+Tenant ID must be validated for every tenant-specific request.
+
+Never trust tenant ID supplied directly by the client.
+
+Derive tenant identity from authenticated user context where possible.
+
+Example:
+
+JWT
+↓
+Authenticated User
+↓
+Tenant ID
+↓
+Database Query
+
+---
+
+# 5. Password Security
+
+Password requirements:
+
+- Minimum 8 characters
+- Uppercase
+- Lowercase
+- Number
+- Special character
+
+Passwords must never appear in logs.
+
+---
+
+# 6. API Security
+
+Implement:
+
+- HTTPS
+- Authentication
+- Authorization
+- Input validation
+- Rate limiting
+- CORS
+- Security headers
+
+---
+
+# 7. Rate Limiting
+
+Rate limit:
+
+Login
+Registration
+Password reset
+Chat messages
+Public APIs
+
+Example:
+
+Maximum:
+
+100 requests/minute per authenticated user
+
+Adjust based on production requirements.
+
+---
+
+# 8. Input Validation
+
+Validate:
+
+- Request body
+- Query parameters
+- Path parameters
+- File uploads
+- Chat messages
+
+Protect against:
+
+- SQL injection
+- XSS
+- Command injection
+- Path traversal
+- Malicious payloads
+
+---
+
+# 9. SQL Injection
+
+Never build SQL queries through string concatenation.
+
+Use:
+
+JPA
+Parameterized queries
+Prepared statements
+
+---
+
+# 10. XSS Protection
+
+Escape user-generated content.
+
+Never blindly render HTML received from users.
+
+---
+
+# 11. CSRF
+
+For JWT-based APIs using Authorization headers, configure CSRF appropriately for the chosen architecture.
+
+Do not disable security controls without understanding the reason.
+
+---
+
+# 12. CORS
+
+Only allow trusted frontend origins.
+
+Do not use:
+
+*
+
+in production.
+
+---
+
+# 13. Secrets
+
+Never commit secrets to Git.
+
+Never store:
+
+Database passwords
+JWT secrets
+API keys
+OAuth secrets
+Third-party credentials
+
+in source code.
+
+Use:
+
+Environment variables
+Secret manager
+Deployment secrets
+
+---
+
+# 14. External Integrations
+
+Integration credentials must be encrypted or securely stored.
+
+Never expose third-party credentials to frontend clients.
+
+All external API calls must originate from trusted backend services.
+
+---
+
+# 15. WebSocket Security
+
+Authenticate WebSocket connections.
+
+Validate:
+
+- User
+- Tenant
+- Conversation
+
+before allowing access.
+
+Never allow a user to subscribe to another tenant's conversation.
+
+---
+
+# 16. AI Security
+
+The AI must not automatically perform dangerous actions without validation.
+
+Sensitive operations require:
+
+- Authentication
+- Authorization
+- Business validation
+- Confirmation where appropriate
+
+Examples:
+
+Refund
+Account deletion
+Order cancellation
+
+---
+
+# 17. Prompt Injection
+
+Treat user messages as untrusted input.
+
+Never allow user input to override system-level security rules.
+
+AI-generated instructions must never bypass backend authorization.
+
+Critical operations must always be enforced by backend code.
+
+---
+
+# 18. AI Output Validation
+
+Never blindly execute AI-generated:
+
+SQL
+Shell commands
+Code
+API URLs
+System instructions
+
+AI output must be validated before being passed to business systems.
+
+---
+
+# 19. Audit Logging
+
+Record security-sensitive events:
+
+- Login
+- Logout
+- Failed login
+- Password changes
+- Role changes
+- API key changes
+- Workflow changes
+- Agent assignment
+- Administrative actions
+
+Never store passwords or secrets in audit logs.
+
+---
+
+# 20. Data Privacy
+
+Store only required customer information.
+
+Protect:
+
+- Email
+- Phone
+- Address
+- Order information
+- Conversation history
+
+Sensitive information should be masked in logs.
+
+---
+
+# 21. Error Security
+
+Do not expose:
+
+- Stack traces
+- Database errors
+- Internal service names
+- File paths
+- Secrets
+
+to clients.
+
+Return safe error messages.
+
+---
+
+# 22. Dependency Security
+
+Regularly check dependencies for vulnerabilities.
+
+Keep:
+
+Java
+Spring Boot
+Node
+Python
+Libraries
+
+updated.
+
+---
+
+# 23. Container Security
+
+Docker containers should:
+
+- Use minimal base images
+- Run as non-root where possible
+- Avoid unnecessary packages
+- Use environment-based secrets
+- Limit exposed ports
+
+---
+
+# 24. Security Testing
+
+Test for:
+
+- Broken authentication
+- Broken authorization
+- IDOR
+- SQL injection
+- XSS
+- CSRF
+- Rate-limit bypass
+- Tenant isolation failures
+- WebSocket authorization
+- Prompt injection
+
+---
+
+# 25. Security Definition of Done
+
+A feature is not complete until:
+
+- Authentication checked
+- Authorization checked
+- Input validated
+- Tenant isolation verified
+- Sensitive data protected
+- Errors handled safely
+- Security tests completed
