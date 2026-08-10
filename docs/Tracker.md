@@ -27,13 +27,13 @@ Status Options:
 
 | Task | Status |
 | :--- | :--- |
-| User entity & Tenant entity | `TODO` |
-| User registration endpoint | `TODO` |
-| User login & JWT generation | `TODO` |
-| Refresh token handling | `TODO` |
-| BCrypt password hashing | `TODO` |
-| Spring Security RBAC filters | `TODO` |
-| Centralized exception handling | `TODO` |
+| User entity & Tenant entity | `DONE` |
+| User registration endpoint | `DONE` |
+| User login & JWT generation | `DONE` |
+| Refresh token handling | `DONE` |
+| BCrypt password hashing | `DONE` |
+| Spring Security RBAC filters | `DONE` |
+| Centralized exception handling | `DONE` |
 
 ---
 
