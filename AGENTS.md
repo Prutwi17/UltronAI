@@ -1086,44 +1086,38 @@ Never mark a task `DONE` unless it has been implemented and tested.
 
 # 36. Implementation Sequence
 
-Follow the defined implementation plan.
+Follow the canonical 15-phase implementation plan defined in `docs/ImplementationPlan.md`.
 
 ```text
-Phase 1
-Foundation
+Phase 1: Project Foundation
         ↓
-Phase 2
-Authentication
+Phase 2: Authentication
         ↓
-Phase 3
-Chat
+Phase 3: Database
         ↓
-Phase 4
-NLP
+Phase 4: Chat
         ↓
-Phase 5
-Workflow Engine
+Phase 5: NLP
         ↓
-Phase 6
-Integrations
+Phase 6: Workflow Engine
         ↓
-Phase 7
-Async Processing
+Phase 7: Integrations
         ↓
-Phase 8
-Human Handoff
+Phase 8: Async Processing
         ↓
-Phase 9
-Analytics
+Phase 9: Human Handoff
         ↓
-Phase 10
-Voice AI
+Phase 10: Admin Dashboard
         ↓
-Phase 11
-Security Hardening
+Phase 11: Analytics
         ↓
-Phase 12
-Testing & Deployment
+Phase 12: Voice
+        ↓
+Phase 13: Security Hardening
+        ↓
+Phase 14: Testing
+        ↓
+Phase 15: Deployment
 ```
 
 Do not randomly jump between phases unless a dependency or bug requires it.

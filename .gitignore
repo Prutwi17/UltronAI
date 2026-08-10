@@ -1,0 +1,61 @@
+# Environment Variables
+.env
+.env.*
+!.env.example
+
+# Node / React Frontend
+node_modules/
+dist/
+build/
+coverage/
+.npm
+.eslintcache
+
+# Java / Spring Boot Backend
+target/
+*.class
+*.jar
+*.war
+*.ear
+.mvn/
+!.mvn/wrapper/maven-wrapper.properties
+
+# Python / AI Service
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.pytest_cache/
+.coverage
+htmlcov/
+*.egg-info/
+.eggs/
+
+# IDEs & Editors
+.idea/
+.vscode/
+*.swp
+*.swo
+*.sublime-workspace
+*.sublime-project
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# OS Artifacts
+.DS_Store
+Thumbs.db
+
+# Logs & Diagnostics
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

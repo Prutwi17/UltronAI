@@ -553,53 +553,21 @@ These documents form the project's engineering source of truth.
 
 # 🗺️ Development Roadmap
 
-### Phase 1
-
-Project foundation
-
-### Phase 2
-
-Authentication & authorization
-
-### Phase 3
-
-Real-time chat
-
-### Phase 4
-
-NLP and intent detection
-
-### Phase 5
-
-Workflow automation
-
-### Phase 6
-
-Business API integrations
-
-### Phase 7
-
-Asynchronous processing
-
-### Phase 8
-
-Human-agent handoff
-
-### Phase 9
-
-Analytics
-
-### Phase 10
-
-Voice AI
-
-### Phase 11
-
-Security hardening
-
-### Phase 12
-
-Testing and production deployment
+* **Phase 1**: Project Foundation
+* **Phase 2**: Authentication & Authorization
+* **Phase 3**: Database Entities & Migrations
+* **Phase 4**: Real-Time Chat Engine
+* **Phase 5**: NLP & Intent Classification
+* **Phase 6**: Workflow Engine Automation
+* **Phase 7**: Business API Integrations
+* **Phase 8**: Asynchronous Processing (RabbitMQ)
+* **Phase 9**: Human-Agent Handoff
+* **Phase 10**: Admin Dashboard UI
+* **Phase 11**: Analytics & Metrics
+* **Phase 12**: Voice AI Interface
+* **Phase 13**: Security Hardening & SSRF Prevention
+* **Phase 14**: Testing Suite (>80% Coverage Target)
+* **Phase 15**: Production Deployment & Docker Containerization
 
 ---
 
