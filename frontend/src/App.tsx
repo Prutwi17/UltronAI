@@ -3,8 +3,9 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { useAuthStore } from './store/authStore';
 import { LoginPage } from './pages/LoginPage';
 import { RegisterPage } from './pages/RegisterPage';
+import { ChatPage } from './pages/ChatPage';
 import { ProtectedRoute } from './components/ProtectedRoute';
-import { Bot, Sparkles, Shield, Cpu, LogOut, User as UserIcon } from 'lucide-react';
+import { Bot, Sparkles, Shield, Cpu, LogOut, MessageSquare, User as UserIcon } from 'lucide-react';
 
 const DashboardView: React.FC = () => {
   const { user, tenant, logout } = useAuthStore();
@@ -18,6 +19,13 @@ const DashboardView: React.FC = () => {
             <span className="font-bold text-lg text-white">UltronAI</span>
           </div>
           <div className="flex items-center gap-4 text-xs">
+            <Link
+              to="/chat"
+              className="px-3.5 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-500 text-white transition flex items-center gap-1.5 font-medium shadow-md shadow-purple-600/20"
+            >
+              <MessageSquare className="w-3.5 h-3.5" />
+              <span>Launch Real-Time Chat</span>
+            </Link>
             <span className="px-3 py-1 rounded-full bg-slate-800 text-slate-300 border border-slate-700 flex items-center gap-1.5">
               <UserIcon className="w-3.5 h-3.5 text-purple-400" />
               {user?.fullName} ({user?.role})
@@ -38,11 +46,11 @@ const DashboardView: React.FC = () => {
         </div>
 
         <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-white">
-          Authenticated Security Context
+          Real-Time Chat & Messaging Gateway
         </h1>
 
         <p className="text-slate-400 text-lg max-w-xl mx-auto">
-          Welcome <span className="text-white font-medium">{user?.fullName}</span>. Phase 2 JWT Stateless Security, Role-Based Access Control, and Tenant Context Isolation are active.
+          Welcome <span className="text-white font-medium">{user?.fullName}</span>. Phase 3 Real-Time WebSocket/STOMP Chat, Message Persistence, and Tenant Isolation are ready.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-left pt-4">
@@ -57,9 +65,9 @@ const DashboardView: React.FC = () => {
             <p className="text-xs text-slate-400 mt-1">Tenant #{user?.tenantId}</p>
           </div>
           <div className="p-4 rounded-xl bg-slate-800/40 border border-slate-800/80">
-            <Bot className="w-6 h-6 text-emerald-400 mb-2" />
-            <h3 className="font-semibold text-white">Security Status</h3>
-            <p className="text-xs text-slate-400 mt-1">JWT Bearer Verified</p>
+            <MessageSquare className="w-6 h-6 text-emerald-400 mb-2" />
+            <h3 className="font-semibold text-white">STOMP Gateway</h3>
+            <p className="text-xs text-slate-400 mt-1">Authenticated /ws Endpoint Active</p>
           </div>
         </div>
       </div>
@@ -82,6 +90,7 @@ export const App: React.FC = () => {
         
         <Route element={<ProtectedRoute />}>
           <Route path="/" element={<DashboardView />} />
+          <Route path="/chat" element={<ChatPage />} />
         </Route>
 
         <Route path="*" element={<Link to="/" replace className="text-purple-400 underline">Return Home</Link>} />

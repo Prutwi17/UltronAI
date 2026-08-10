@@ -37,27 +37,17 @@ Status Options:
 
 ---
 
-# Phase 3 — Database
+# Phase 3 — Database & Real-Time Chat
 
 | Task | Status |
 | :--- | :--- |
-| All JPA Entities & Repositories | `TODO` |
-| `workflow_edges` & dynamic graph mapping | `TODO` |
-| DTOs & Mappers | `TODO` |
-| Service interfaces & implementations | `TODO` |
-| Database migration scripts (Flyway/Liquibase) | `TODO` |
-
----
-
-# Phase 4 — Chat
-
-| Task | Status |
-| :--- | :--- |
-| Chat UI components | `TODO` |
-| Conversation API & Message API | `TODO` |
-| WebSocket STOMP endpoint `/ws` | `TODO` |
-| Message persistence | `TODO` |
-| Typing indicator handling | `TODO` |
+| Conversation, Message & Participant Entities | `DONE` |
+| Conversation & Message Repositories | `DONE` |
+| Conversation & Message REST APIs | `DONE` |
+| Authenticated STOMP WebSocket Gateway (`/ws`) | `DONE` |
+| Real-Time Message Persistence & Broadcast | `DONE` |
+| STOMP Security & Tenant Isolation Interceptor | `DONE` |
+| Frontend Real-Time Chat UI Foundation | `DONE` |
 
 ---
 
