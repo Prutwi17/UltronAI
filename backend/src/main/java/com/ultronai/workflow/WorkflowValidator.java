@@ -40,6 +40,15 @@ public class WorkflowValidator {
             errors.add("Workflow graph must contain at least one END node.");
         }
 
+        // 3. Node Configuration validation
+        for (WorkflowNode node : nodes) {
+            if (node.getNodeType() == NodeType.API_CALL) {
+                if (node.getConfigJson() == null || !node.getConfigJson().contains("\"url\"")) {
+                    errors.add("API_CALL node #" + node.getId() + " (" + node.getName() + ") must specify a valid target URL in configJson.");
+                }
+            }
+        }
+
         // 3. Edge validation
         Set<Long> nodeIds = nodes.stream().map(WorkflowNode::getId).collect(Collectors.toSet());
         if (edges != null) {

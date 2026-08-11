@@ -66,6 +66,28 @@ public class ConditionNodeHandler implements NodeExecutionHandler {
             return targetIntent.equalsIgnoreCase(context.getIntentName());
         }
 
+        // 6. api_response status check: e.g. api_response.status == 200
+        if (expr.startsWith("api_response.status ==")) {
+            try {
+                int targetStatus = Integer.parseInt(expr.replace("api_response.status ==", "").trim());
+                Object apiResp = context.getVariables().get("api_response");
+                if (apiResp instanceof java.util.Map) {
+                    Object statusObj = ((java.util.Map<?, ?>) apiResp).get("status");
+                    return statusObj instanceof Integer && ((Integer) statusObj) == targetStatus;
+                }
+            } catch (Exception ignored) {}
+        }
+        if (expr.startsWith("api_response.status !=")) {
+            try {
+                int targetStatus = Integer.parseInt(expr.replace("api_response.status !=", "").trim());
+                Object apiResp = context.getVariables().get("api_response");
+                if (apiResp instanceof java.util.Map) {
+                    Object statusObj = ((java.util.Map<?, ?>) apiResp).get("status");
+                    return statusObj instanceof Integer && ((Integer) statusObj) != targetStatus;
+                }
+            } catch (Exception ignored) {}
+        }
+
         return false;
     }
 }

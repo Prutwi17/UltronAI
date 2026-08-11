@@ -1,5 +1,5 @@
 export type WorkflowStatus = 'DRAFT' | 'PUBLISHED' | 'ACTIVE' | 'ARCHIVED';
-export type NodeType = 'START' | 'MESSAGE' | 'CONDITION' | 'END';
+export type NodeType = 'START' | 'MESSAGE' | 'CONDITION' | 'API_CALL' | 'END';
 
 export interface WorkflowNode {
   id: number;

@@ -12,6 +12,8 @@ export const WorkflowEditor: React.FC<Props> = ({ workflow, onAddNode, onAddEdge
   const [nodeType, setNodeType] = useState<NodeType>('MESSAGE');
   const [nodeName, setNodeName] = useState('');
   const [messageConfig, setMessageConfig] = useState('');
+  const [apiMethod, setApiMethod] = useState('GET');
+  const [apiUrl, setApiUrl] = useState('');
 
   const [sourceId, setSourceId] = useState<number | ''>('');
   const [targetId, setTargetId] = useState<number | ''>('');
@@ -23,10 +25,16 @@ export const WorkflowEditor: React.FC<Props> = ({ workflow, onAddNode, onAddEdge
   const handleAddNodeSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!nodeName.trim()) return;
-    const configJson = nodeType === 'MESSAGE' ? JSON.stringify({ message: messageConfig }) : undefined;
+    let configJson: string | undefined;
+    if (nodeType === 'MESSAGE') {
+      configJson = JSON.stringify({ message: messageConfig });
+    } else if (nodeType === 'API_CALL') {
+      configJson = JSON.stringify({ url: apiUrl, method: apiMethod });
+    }
     onAddNode(nodeType, nodeName, configJson);
     setNodeName('');
     setMessageConfig('');
+    setApiUrl('');
   };
 
   const handleAddEdgeSubmit = (e: React.FormEvent) => {
@@ -123,6 +131,7 @@ export const WorkflowEditor: React.FC<Props> = ({ workflow, onAddNode, onAddEdge
                 <option value="START">START</option>
                 <option value="MESSAGE">MESSAGE</option>
                 <option value="CONDITION">CONDITION</option>
+                <option value="API_CALL">API_CALL</option>
                 <option value="END">END</option>
               </select>
             </div>
@@ -149,6 +158,35 @@ export const WorkflowEditor: React.FC<Props> = ({ workflow, onAddNode, onAddEdge
                   className="w-full bg-slate-900 border border-slate-800 rounded px-2.5 py-1.5 text-xs text-slate-200 font-mono"
                   rows={3}
                 />
+              </div>
+            )}
+
+            {nodeType === 'API_CALL' && (
+              <div className="space-y-2">
+                <div>
+                  <label className="block text-[11px] text-slate-400 mb-1">HTTP Method</label>
+                  <select
+                    value={apiMethod}
+                    onChange={(e) => setApiMethod(e.target.value)}
+                    className="w-full bg-slate-900 border border-slate-800 rounded px-2.5 py-1.5 text-xs text-slate-200"
+                  >
+                    <option value="GET">GET</option>
+                    <option value="POST">POST</option>
+                    <option value="PUT">PUT</option>
+                    <option value="DELETE">DELETE</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-[11px] text-slate-400 mb-1">Target URL</label>
+                  <input
+                    type="text"
+                    required
+                    value={apiUrl}
+                    onChange={(e) => setApiUrl(e.target.value)}
+                    placeholder="https://api.external.com/orders/${entities.order_id}"
+                    className="w-full bg-slate-900 border border-slate-800 rounded px-2.5 py-1.5 text-xs text-slate-200 font-mono"
+                  />
+                </div>
               </div>
             )}
 

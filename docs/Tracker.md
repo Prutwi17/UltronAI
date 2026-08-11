@@ -63,7 +63,7 @@ Status Options:
 
 ---
 
-# Phase 5 — Workflow Automation & Execution Engine
+# Phase 6 — Workflow Engine & API_CALL Integration
 
 | Task | Status |
 | :--- | :--- |
@@ -72,6 +72,7 @@ Status Options:
 | Condition evaluation engine | `DONE` |
 | Graph validation engine | `DONE` |
 | Message generation nodes | `DONE` |
+| REST `API_CALL` node execution & SSRF Protection | `DONE` |
 
 ---
 
