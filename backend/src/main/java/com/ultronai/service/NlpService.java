@@ -28,19 +28,25 @@ public class NlpService {
     private final MessageRepository messageRepository;
     private final SimpMessagingTemplate messagingTemplate;
     private final ObjectMapper objectMapper;
+    private final com.ultronai.repository.WorkflowRepository workflowRepository;
+    private final WorkflowExecutionService workflowExecutionService;
 
     public NlpService(
         AiServiceClient aiServiceClient,
         MessageNlpResultRepository nlpResultRepository,
         MessageRepository messageRepository,
         SimpMessagingTemplate messagingTemplate,
-        ObjectMapper objectMapper
+        ObjectMapper objectMapper,
+        com.ultronai.repository.WorkflowRepository workflowRepository,
+        WorkflowExecutionService workflowExecutionService
     ) {
         this.aiServiceClient = aiServiceClient;
         this.nlpResultRepository = nlpResultRepository;
         this.messageRepository = messageRepository;
         this.messagingTemplate = messagingTemplate;
         this.objectMapper = objectMapper;
+        this.workflowRepository = workflowRepository;
+        this.workflowExecutionService = workflowExecutionService;
     }
 
     @Transactional
@@ -67,8 +73,38 @@ public class NlpService {
         );
         result = nlpResultRepository.save(result);
 
-        // Generate and broadcast assistant response
-        generateAssistantResponse(userMessage, analysis);
+        // Check if matching published workflow exists for intent
+        boolean workflowExecuted = false;
+        if (!analysis.isFallback() && !"UNKNOWN".equals(intentName)) {
+            Optional<com.ultronai.model.entity.Workflow> workflowOpt = workflowRepository.findByTenantIdAndTriggerIntentAndStatus(
+                userMessage.getTenant().getId(),
+                intentName,
+                com.ultronai.model.enums.WorkflowStatus.PUBLISHED
+            );
+            if (workflowOpt.isPresent()) {
+                java.util.Map<String, String> entitiesMap = new java.util.HashMap<>();
+                if (analysis.getEntities() != null) {
+                    for (NlpAnalysisResponse.EntityInfo e : analysis.getEntities()) {
+                        entitiesMap.put(e.getType(), e.getValue());
+                    }
+                }
+                com.ultronai.workflow.ExecutionContext context = new com.ultronai.workflow.ExecutionContext(
+                    userMessage.getTenant().getId(),
+                    userMessage.getSenderId(),
+                    userMessage.getConversation().getId(),
+                    intentName,
+                    confidence,
+                    entitiesMap
+                );
+                workflowExecutionService.executeWorkflow(workflowOpt.get().getId(), userMessage.getConversation().getId(), context);
+                workflowExecuted = true;
+            }
+        }
+
+        // Fallback to default response if no workflow executed
+        if (!workflowExecuted) {
+            generateAssistantResponse(userMessage, analysis);
+        }
 
         return result;
     }

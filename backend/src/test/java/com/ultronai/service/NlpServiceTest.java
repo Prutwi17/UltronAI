@@ -44,6 +44,12 @@ class NlpServiceTest {
     @Mock
     private SimpMessagingTemplate messagingTemplate;
 
+    @Mock
+    private com.ultronai.repository.WorkflowRepository workflowRepository;
+
+    @Mock
+    private WorkflowExecutionService workflowExecutionService;
+
     @Spy
     private ObjectMapper objectMapper = new ObjectMapper();
 

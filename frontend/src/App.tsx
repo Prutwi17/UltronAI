@@ -4,6 +4,7 @@ import { useAuthStore } from './store/authStore';
 import { LoginPage } from './pages/LoginPage';
 import { RegisterPage } from './pages/RegisterPage';
 import { ChatPage } from './pages/ChatPage';
+import { WorkflowPage } from './pages/WorkflowPage';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { Bot, Sparkles, Shield, Cpu, LogOut, MessageSquare, User as UserIcon } from 'lucide-react';
 
@@ -26,6 +27,13 @@ const DashboardView: React.FC = () => {
               <MessageSquare className="w-3.5 h-3.5" />
               <span>Launch Real-Time Chat</span>
             </Link>
+            <Link
+              to="/workflows"
+              className="px-3.5 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white transition flex items-center gap-1.5 font-medium shadow-md shadow-indigo-600/20"
+            >
+              <Cpu className="w-3.5 h-3.5" />
+              <span>Workflow Engine</span>
+            </Link>
             <span className="px-3 py-1 rounded-full bg-slate-800 text-slate-300 border border-slate-700 flex items-center gap-1.5">
               <UserIcon className="w-3.5 h-3.5 text-purple-400" />
               {user?.fullName} ({user?.role})
@@ -46,11 +54,11 @@ const DashboardView: React.FC = () => {
         </div>
 
         <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-white">
-          Real-Time Chat & Messaging Gateway
+          UltronAI Workflow & Conversational Engine
         </h1>
 
         <p className="text-slate-400 text-lg max-w-xl mx-auto">
-          Welcome <span className="text-white font-medium">{user?.fullName}</span>. Phase 3 Real-Time WebSocket/STOMP Chat, Message Persistence, and Tenant Isolation are ready.
+          Welcome <span className="text-white font-medium">{user?.fullName}</span>. Phase 5 Graph Execution, Workflow Automation, and STOMP WebSocket Messaging are ready.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-left pt-4">
@@ -91,6 +99,7 @@ export const App: React.FC = () => {
         <Route element={<ProtectedRoute />}>
           <Route path="/" element={<DashboardView />} />
           <Route path="/chat" element={<ChatPage />} />
+          <Route path="/workflows" element={<WorkflowPage />} />
         </Route>
 
         <Route path="*" element={<Link to="/" replace className="text-purple-400 underline">Return Home</Link>} />

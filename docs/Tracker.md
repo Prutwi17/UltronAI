@@ -63,15 +63,15 @@ Status Options:
 
 ---
 
-# Phase 6 — Workflow Engine
+# Phase 5 — Workflow Automation & Execution Engine
 
 | Task | Status |
 | :--- | :--- |
-| Workflow & node execution model | `TODO` |
-| Graph traversal (`workflow_edges`) | `TODO` |
-| Condition evaluation engine | `TODO` |
-| REST `API_CALL` node execution | `TODO` |
-| Message generation nodes | `TODO` |
+| Workflow & node execution model | `DONE` |
+| Graph traversal (`workflow_edges`) | `DONE` |
+| Condition evaluation engine | `DONE` |
+| Graph validation engine | `DONE` |
+| Message generation nodes | `DONE` |
 
 ---
 
