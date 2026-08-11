@@ -19,4 +19,5 @@ def test_predict_endpoint():
     assert response.status_code == 200
     data = response.json()
     assert "intent" in data
-    assert "confidence" in data
+    assert "name" in data["intent"]
+    assert "confidence" in data["intent"]

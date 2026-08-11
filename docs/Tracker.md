@@ -51,15 +51,15 @@ Status Options:
 
 ---
 
-# Phase 5 — NLP
+# Phase 4 — NLP & Intent Detection
 
 | Task | Status |
 | :--- | :--- |
-| Text preprocessing & normalization | `TODO` |
-| Intent classification engine | `TODO` |
-| Entity extraction (Regex & spaCy) | `TODO` |
-| Confidence scoring & threshold check | `TODO` |
-| Fallback & clarification handling | `TODO` |
+| Text preprocessing & normalization | `DONE` |
+| Intent classification engine | `DONE` |
+| Entity extraction (Regex & spaCy) | `DONE` |
+| Confidence scoring & threshold check | `DONE` |
+| Fallback & clarification handling | `DONE` |
 
 ---
 

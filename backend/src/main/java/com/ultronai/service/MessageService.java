@@ -26,17 +26,20 @@ public class MessageService {
     private final ConversationRepository conversationRepository;
     private final ConversationService conversationService;
     private final SimpMessagingTemplate messagingTemplate;
+    private final NlpService nlpService;
 
     public MessageService(
         MessageRepository messageRepository,
         ConversationRepository conversationRepository,
         ConversationService conversationService,
-        SimpMessagingTemplate messagingTemplate
+        SimpMessagingTemplate messagingTemplate,
+        NlpService nlpService
     ) {
         this.messageRepository = messageRepository;
         this.conversationRepository = conversationRepository;
         this.conversationService = conversationService;
         this.messagingTemplate = messagingTemplate;
+        this.nlpService = nlpService;
     }
 
     @Transactional
@@ -62,6 +65,15 @@ public class MessageService {
         // Real-time broadcast over STOMP WebSocket to authorized tenant topic
         String destination = String.format("/topic/tenants/%d/conversations/%d", conversation.getTenant().getId(), conversation.getId());
         messagingTemplate.convertAndSend(destination, response);
+
+        // Trigger NLP analysis for user messages
+        if (request.getSenderType() == null || request.getSenderType() == com.ultronai.model.enums.SenderType.USER) {
+            try {
+                nlpService.processUserMessage(message);
+            } catch (Exception e) {
+                // Do not fail user message sending if NLP fails
+            }
+        }
 
         return response;
     }
